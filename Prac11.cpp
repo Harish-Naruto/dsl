@@ -2,7 +2,7 @@
 #include<string>
 using namespace std;
 
-#define max 10
+#define max 100
 
 class stack{
     private:

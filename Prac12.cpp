@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 
-#define max 10
+#define max 100
 
 class jobqueue{
     private:
