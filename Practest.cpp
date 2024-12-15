@@ -1,8 +1,8 @@
 #include<iostream>
+#include<cctype>
 #include<string>
 using namespace std;
-
-#define max 10
+#define max 100
 
 class stack{
     private:
@@ -13,69 +13,58 @@ class stack{
         top = -1;
     }
 
-    bool isempty(){
-        if(top == -1){
-            return true;
-        }
-        return false;
-    }
-    
-    bool isfull(){
+    void push(char c){
         if(top >= max){
-            return true;
-        }
-        return false;
-    }
-
-    void push(char x){
-        if(isfull()){
             cout<<"stack is full"<<endl;
             return;
         }
         top++;
-        st[top]=x;
-
+        st[top] = c;
     }
 
-    void pop(){
-        if(isempty()){
-            cout<<"stack is empty"<<endl;
-            return;
-        }
+    char pop(){
+        char c = st[top];
         top--;
+        return c;
     }
-    char top_st(){
-        return st[top];
+
+    string reverse(){
+        string temp = "";
+        while(top>=0){
+            temp = temp + pop();
+        }
+        return temp;
     }
+
 
 
 };
 
-int main(){
-    string s;
-    stack stk;
-    cout<<"Enter the expression to check: ";
-    cin>>s;
-    if(s[0]==')' || s[0]=='}' || s[0]==']'){
-        cout<<"\n Invalid Expression..."<<endl;
-        return 0;
-    }
-    for(int i = 0 ; i < s.size(); i++){
-        if(stk.isempty() || s[i] == '(' || s[i] == '{' || s[i] == '['){
-            stk.push(s[i]);
-        }else if((stk.top_st()=='{' && s[i]=='}') || (stk.top_st()=='(' && s[i]==')') || (stk.top_st()=='[' && s[i]==']')){
-            stk.pop();
-        }else{
-            cout<<"\n Invalid Expression..."<<endl;
-            return 0;
+string convert(string s){
+    string temp = "";
+    for(int i = 0; i < s.size() ; i++){
+        if(isalnum(s[i])){
+            char c = tolower(s[i]);
+            temp = temp + c;
         }
     }
-
-    if(stk.isempty()){
-        cout<<"\n Valid expression.."<<endl;
+    return temp;
+}
+ int main(){
+    stack stk;
+    string s;
+    cout<<"Enter the string to be reversed ans check it for palindrome : ";
+    getline(cin,s);
+    s = convert(s);
+    cout<<"the converted string is : "<<s<<endl;
+    for(int i = 0 ; i < s.size() ; i++){
+        stk.push(s[i]);
+    }
+    string rev = stk.reverse();
+    if(rev == s){
+        cout<<"striing is palindrom"<<endl;
         return 0;
     }
-    cout<<"\n Invalid Expression..."<<endl;
+    cout<<"string is not plaindrom"<<endl;
     return 0;
-    
-}
+ }

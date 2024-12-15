@@ -1,133 +1,70 @@
-
-/*
-
-
-A palindrome is a string of character that‘s the same forward and backward. Typically, punctuation, capitalization, 
-and spaces are ignored. For example, “Poor Dan is in a droop” is a palindrome, as can be seen by examining the characters
-“poor danisina droop” and observing that they are the same forward and backward. One way to check for a palindrome is to reverse
-the characters in the string and then compare with them the original-in a palindrome, the sequence will be identical. Write C++ program 
-with functions- 
-a) To print original string followed by reversed string using stack 
-b) To check whether given string is palindrome or not
-
-*/
-
 #include<iostream>
-#include<string.h>
-#define max 50
+#include<cctype>
+#include<string>
 using namespace std;
+#define max 100
 
-class STACK
-{
-	private:
-		char a[max];
-		int top;
-	
-	public:
-		STACK()
-		{
-			top=-1;	
-		}	
-		
-		void push(char);
-		void reverse();	
-		void convert(char[]);
-		void palindrome();
+class stack{
+    private:
+    char st[max];
+    int top;
+    public:
+    stack(){
+        top = -1;
+    }
+
+    void push(char c){
+        if(top >= max){
+            cout<<"stack is full"<<endl;
+            return;
+        }
+        top++;
+        st[top] = c;
+    }
+
+    char pop(){
+        char c = st[top];
+        top--;
+        return c;
+    }
+
+    string reverse(){
+        string temp = "";
+        while(top>=0){
+            temp = temp + pop();
+        }
+        return temp;
+    }
+
+
+
 };
 
-void STACK::push(char c)
-{
-	top++;
-	a[top] = c;
-	a[top+1]='\0';
-	
-	cout<<endl<<c<<" is pushed on stack ...";
+string convert(string s){
+    string temp = "";
+    for(int i = 0; i < s.size() ; i++){
+        if(isalnum(s[i])){
+            char c = tolower(s[i]);
+            temp = temp + c;
+        }
+    }
+    return temp;
 }
-
-void STACK::reverse()
-{
-	char str[max];
-	
-	cout<<"\n\nReverse string is : ";
-		
-	for(int i=top,j=0; i>=0; i--,j++)
-	{
-		cout<<a[i];
-		str[j]=a[i];
-	}
-	
-	cout<<endl;
-}
-
-
-void STACK::convert(char str[])
-{
-	int j,k,len = strlen(str);
-
-	for(j=0, k=0; j<len; j++)
-	{
-		if( ( (int)str[j] >= 97 && (int)str[j] <=122 ) || ( (int)str[j] >= 65 && (int)str[j] <=90 ))
-		{
-			if( (int)str[j] <=90 )
-			{
-				str[k] = (char)( (int)str[j] + 32 );
-			}else
-			{
-				str[k] = str[j];				
-			}
-
-			k++;			
-		}
-	}
-	str[k]='\0';
-
-	cout<<endl<<"Converted String : "<<str<<"\n";
-}
-
-
-
-
-void STACK::palindrome()
-{	
-	char str[max];
-	int i,j;		
-
-	for(i=top,j=0; i>=0; i--,j++)
-	{
-		str[j]=a[i];
-	}
-	str[j]='\0';
-	
-	
-	if(strcmp(str,a) == 0)
-		cout<<"\n\nString is palindrome...";
-	else
-		cout<<"\n\nString is not palindrome...";
-}
-
-
-int main()
-{
-	STACK stack;
-
-	char str[max];
-	int i=0;
-	
-	cout<<"\nEnter string to be reversed and check is it palindrome or not : \n\n";
-	
-	cin.getline(str , 50);
-	
-	stack.convert(str);
-	
-	while(str[i] != '\0')
-	{
-		stack.push(str[i]);
-		i++;
-	}
-
-	stack.palindrome();
-
-	stack.reverse();
-	
-}
-
+ int main(){
+    stack stk;
+    string s;
+    cout<<"Enter the string to be reversed ans check it for palindrome : ";
+    getline(cin,s);
+    s = convert(s);
+    cout<<"the converted string is : "<<s<<endl;
+    for(int i = 0 ; i < s.size() ; i++){
+        stk.push(s[i]);
+    }
+    string rev = stk.reverse();
+    if(rev == s){
+        cout<<"striing is palindrom"<<endl;
+        return 0;
+    }
+    cout<<"string is not plaindrom"<<endl;
+    return 0;
+ }
