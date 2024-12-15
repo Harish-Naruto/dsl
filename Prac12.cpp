@@ -1,11 +1,14 @@
 #include<iostream>
 using namespace std;
+
 #define max 10
+
 class jobqueue{
     private:
     int queue[max];
     int front,rare;
     public:
+	
     jobqueue(){
         front = -1;
         rare = -1;
