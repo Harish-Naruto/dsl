@@ -7,6 +7,7 @@ class jobqueue{
     private:
     int queue[max];
     int front,rare;
+    
     public:
 	
     jobqueue(){

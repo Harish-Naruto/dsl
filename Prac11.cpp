@@ -60,6 +60,7 @@ int main(){
         cout<<"\n Invalid Expression..."<<endl;
         return 0;
     }
+    
     for(int i = 0 ; i < s.size(); i++){
         if(stk.isempty() || s[i] == '(' || s[i] == '{' || s[i] == '['){
             stk.push(s[i]);
