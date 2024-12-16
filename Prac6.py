@@ -9,6 +9,19 @@ def selection_sort(marks):
     print("marks after selection sort are: ")
     for i in range(len(marks)):
         print(marks[i])
+    ch = input("do you want to get top 5 (y/n): ")
+    if ch == 'y':
+        display_topfive(marks)
+    
+
+def display_topfive(perc):
+    print("Top five percentages are : ")
+    i = len(perc)-1
+    count = 0
+    while i>=0 and count!=5:
+        print(perc[i])
+        count+=1
+        i-=1  
 
 def bubble_sort(marks):
     for i in range(len(marks)-1):
@@ -19,6 +32,10 @@ def bubble_sort(marks):
     print("marks after bubble sort are : ")
     for i in range(len(marks)):
         print(marks[i])
+    ch = input("do you want to get top 5 (y/n): ")
+    if ch == 'y':
+        display_topfive(marks)
+
 
 marks = []
 
